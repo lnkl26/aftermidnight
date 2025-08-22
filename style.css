@@ -1,0 +1,545 @@
+@font-face { /*to integrate custom font | credit in Asset_Credit file*/
+    font-family: 'title_font';
+    src: url(Assets/fonts/PirataOne-Regular.ttf) format('truetype'); /*path to font and file type*/
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face { /*to integrate custom font | credit in Asset_Credit file*/
+    font-family: 'body_font';
+    src: url(Assets/fonts/fantasque-sans-mono.regular.otf) format('opentype'); /*path to font and file type*/
+    font-weight: normal;
+    font-style: normal;
+}
+@keyframes floaty { /*animation to float title! each percent is animation
+                            completion, transform states it will move,
+                            and then tranY and rotate are what to do,
+                            the arguments are how much to translate 
+                            and rotate*/
+ 0% { transform:  rotate(0deg); }
+25% { transform:  rotate(1deg); }
+50% { transform:  rotate(0deg); }
+75% { transform:  rotate(-1deg);}
+100% { transform: rotate(0deg); }
+/*decided translate looks weird, feel free to play w/ it */
+}
+.floaty, .stars, .stars2 { /*optimizing a little bit*/
+    will-change: transform, opacity;/*less expensive animations*/
+}
+.floaty { /*this will define the speed and loop of the floaty class*/
+    animation: floaty 3s ease-in-out infinite;
+}
+.title { /*fonts for title*/
+    font-family: 'title_font'; /* Use the custom font for title */
+    font-size: 75px; /* Larger font size */
+    text-align: center; /* Center the title */
+    color: rgb(0, 0, 0); /* Title font color */
+    -webkit-text-stroke: .01px rgb(255, 255, 255); /* Outline for the title */
+    margin-top: 25px; /* Space from top */
+}
+.stars { /*twinkle effect layer 1*/
+    width: 2px; /*size*/
+    height: 2px;
+    background: white;
+    box-shadow: /*creates a shadow around an element*/
+        /*syntax: x-offset+color, y-offset+color, blur radius+color*/
+        50px 80px white, 120px 200px white, 230px 450px white, 
+        500px 500px white, 700px 750px white, 1020px 630px white,
+        1130px 140px white, 50px 300px white, 300px 1200px white,
+        800px 400px white, 250px 850px white, 1300px 900px white;
+        /*^^^This generates dots(stars) using box-shadow + psuedo random placement*/
+    position: fixed; /*stay in one spot to twinkle*/
+    animation: twinkle 3s infinite alternate; /*animation behaviour*/
+    z-index: -2;
+}
+.stars2 { /*layer 2 acts slightly different to make effect cooler!*/
+    width: 3px;
+    height: 3px;
+    background: white;
+    box-shadow: 
+    90px 190px white, 180px 500px white, 400px 300px white, 
+    650px 900px white, 850px 120px white, 950px 700px white,
+    1250px 400px white, 300px 700px white, 450px 1100px white,
+    1100px 250px white, 900px 980px white, 1400px 650px white;
+    position: fixed;
+    animation: twinkle 4s infinite alternate;
+    z-index: -2;
+}
+@keyframes twinkle { /*each frame changes opacity*/
+    0% { opacity: 0.25; }
+    25% { opacity: 0.5; }
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+    100% { opacity: 0.25; }
+}
+#text_input { /*this is the dialogue box that holds username*/
+    width: 200px;
+    height: 42;
+    padding: 10px; /*spacing*/
+    font-size: 28px; 
+    font-family: 'body_font';
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 6px; /*beveled edges*/
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255); /*typed font color*/
+    text-align: center;
+    align-self: center;
+    outline: none; /*remove default border*/
+    transition: 0.5s; /*will make it hover*/
+}
+#shop_input { /*dialogue box that holds shop input*/
+    width: 200px;
+    height: 42;
+    padding: 10px; /*spacing*/
+    font-size: 28px; 
+    font-family: 'body_font';
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 6px; /*beveled edges*/
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255); /*typed font color*/
+    text-align: center;
+    align-self: center;
+    outline: none; /*remove default border*/
+    transition: 0.5s; /*will make it hover*/
+}
+body {  
+    background: linear-gradient(to bottom, rgb(48, 26, 146), rgb(68, 38, 159), rgb(90, 27, 228), rgb(123, 76, 254), rgb(179, 135, 254) );
+    background-attachment: fixed; /*background stays fixed*/;
+    /*^^^BACKGROUND GRADIENT!!!^^^*/
+    color: rgb(255, 255, 255); /*font color */
+    /*-webkit-text-stroke: .5px rgb(255, 255, 255);*/
+    text-align: left; /*align text*/
+    margin-top: 10px; /*space from top*/
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 35px;
+    font-family: 'body_font'; /*use font defined in font-face*/
+}
+.skyline {
+    position: fixed; /*wont move if scroll*/
+    background-image: url(Assets/skyline.png);
+    background-size: cover; /*this and next line let it take up whole width*/
+    background-repeat: repeat-x;
+    background-position: 100% bottom;
+    bottom: 0; /*margins*/
+    left: 0;
+    width: 100%;
+    height: 512px;
+    z-index: -1; /*behind everything*/
+}
+button { /*makes our buttons pretty*/
+    font-family: 'body_font';
+    font-size: 24px; 
+    padding: 12px 24px; /*adds padding*/
+    border: 2px solid white; /*adds a clean border*/
+    border-radius: 10px; /*beveled corners!*/
+    background: linear-gradient(to bottom, #000000, #621cd3); /* Gradient color */
+    color: white;
+    box-shadow: 0px 5px 10px rgba(255, 255, 255, 0.589); /*let it shine!*/
+    text-transform: uppercase; /*caps continuity*/
+    margin: 8px;
+    cursor: pointer;/*change to little finger on hover*/
+}
+button:hover { /*when hovering how to behave*/
+    background: linear-gradient(to bottom, #000000, #34016b); /*darkens gradient*/
+    transform: scale(1.05); /*button grows when hovered*/
+    box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.804); /*increase shine*/
+}
+button:active {/*when clicked behavior*/
+    transform: scale(0.95); /*shrink*/
+    box-shadow: 0px 3px 7px rgba(53, 53, 53, 0.4);/*alter shadow*/
+}
+#first_load { /*to target home screen and center the dialouge cuz body is left aligned*/
+text-align: center;
+}
+.drop_menu { /*defining our drop_menu*/
+    background-color: aliceblue;
+    color: white;
+    padding: 12px;
+    font-family: 'body_font';
+    cursor: pointer;
+    margin-top: 10px;
+}
+/*the rest is defining dropbutton behaviour*/
+.dropdown { /*gives div a position to start*/
+position: relative;
+display: inline-block;
+}
+.dropdown-content{ /*hides drop_menu until hover?*/
+    display: none;
+    position: absolute;
+    border: #fff solid 2px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #000000, #621cd3); /* Gradient color */
+    min-width: 160px;
+    box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.804); /*increase shine*/
+    z-index: 1;
+    
+}
+.dropdown-content a { /*style links/option within menu*/
+color: white;
+padding: 20px 15px;
+text-decoration: none;
+display: block;
+text-transform: uppercase;
+
+}
+.dropdown-content a:hover { /*options change on hover*/
+    background-color: #621cd3;
+    border-radius: 10px;
+} 
+.dropdown:hover .dropdown-content { /*display menu on hover*/
+    display: block;
+}
+.dropdown:hover .drop_menu { /*change button color while menu open*/
+    background-color: #34016b;
+}
+/*adding tooltip to class buttons*/
+.classChoice-button{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+/*tooltip styling*/
+.tooltip {
+    visibility: hidden; /*not static*/
+    width: 200px;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    font-size: 1.125rem;
+    border: #fff solid 2px;
+    padding: 8px;
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.804); /*increase shine*/
+    background: linear-gradient(to bottom, #000000, #621cd3); /* Gradient color */
+    z-index: 1; /*appear over scene(display priority)*/
+    bottom: 100%; /*tooltip over button rather than below*/
+    left: 50%;
+    /*little animation/fade in quickly*/
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    white-space: pre-line; /*allows new lines */
+}
+.classChoice-button:hover .tooltip { /*only show tooltip on hover*/
+    visibility: visible;
+    opacity: 1;
+}
+#class_choices { /*center class choices*/
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+#choices_container { /*center all other choice buttons*/
+    display: flex;
+    justify-content: center;
+}
+.fight-container {
+    display: none;
+}
+.stats-panel { /*stats panel style*/
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: body_font;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 999; /*ensure its infront of EVERYTHING*/
+    width: 300px;
+    border: 2px solid #621cd3;
+}
+.stats-panel h3 { /*heading of stats panel style*/
+    margin-top: 0;
+    font-size: 1.3em;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0px;
+}
+.stats-panel h5 { /*class name*/
+    margin: 2px 0;
+    padding-top: 0;
+    margin-top: 0;
+    padding-bottom: 5px;
+    font-size: 1.1em;
+    text-align: left;
+    padding: 2px 0;
+}
+.stats-panel p {/*paragraph of stats panel style*/
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+#stats_panel{
+    display: none; /*hidden*/
+}
+.stats-panel .close-btn { /*differ from normal buttons, more sleek*/
+position: absolute;
+bottom: 2px;
+right: 2px;
+font-size: 28px;
+padding: none;
+border: none;
+background: none;
+box-shadow: none;
+z-index: 1000; /*infornt of everything + stats panel*/
+}
+#game-log {
+    margin-top: 20px;
+}
+.skip-tip {
+    text-align: center;
+    font-size: 12px;
+    font-family: 'body_font';
+    color: #fff;
+    margin-top: 10px;
+    opacity: 0;
+}
+.skip-tip.visible {
+    opacity: 1;
+}
+/*reused stats-panel w/ modifications*/
+#settings_panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*center the panel*/
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'body_font';
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+    width: 300px; /*wider than stats panel*/
+}
+/*puts label and button in row*/
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+#minimap_container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #2d2d2d;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 500;
+}
+#minimap {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(2, 30px);
+    gap: 3px;
+}
+.minimap-tile {
+    width: 30px;
+    height: 30px;
+    background-color: #341e56;
+    border: .5px solid #f0f0f0;
+    border-radius: 3px;
+}
+.minimap-player {
+    background-color: rgb(255, 255, 255);
+}
+#minimap_label {
+    text-align: center;
+    margin-top: 8px;
+    color: rgb(255, 255, 255);
+    font-family: 'body_font';
+    font-size: 1.65rem;
+}
+.fight-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.hp-display {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+#turn-log {
+    margin: 10px auto;
+    padding: 10px;
+    width: 50%;
+    height: 120px;
+    overflow-y: auto;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+.limited_warning {
+    position: absolute; /*dont displace buttons*/
+    font-size: 0.4em;
+    color: gold;
+    top: -20px; 
+    left: 50%; /*center it over button*/
+    transform: translateX(-50%); /*center over button*/
+    font-family: 'body_font';
+    text-align: center;
+    white-space: nowrap;
+}
+#inventory_panel {
+    position: fixed;
+    bottom: 80px;
+    left: 10px;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-family: body_font;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    z-index: 999;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 2px solid #621cd3;
+}
+#inventory_list li {
+    padding: 2px 10px;
+    font-size: .75em;
+}
+
+/* for the dish puzzle */
+#feedback-log { 
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+#puzzle-container {
+    text-align: center;
+}
+
+#puzzle-container [data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+#puzzle-container [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%; /* above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30, 30, 30, 0.95);
+    color: #f7bc2b;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    font-size: 13px;
+    z-index: 10;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+#puzzle-container [data-tooltip]:hover::after {
+    opacity: 1;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.4s;
+}
+
+.dish-sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #ffffffcc 0%, #ffffff00 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkleFade 0.6s ease-out forwards;
+    z-index: 1000;
+}
+
+@keyframes sparkleFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.8);
+    }
+}
+
+.maze-layout {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.pantry-minimap {
+    display: grid;
+    grid-template-columns: repeat(3, 77px);
+    gap: 4px;
+    justify-content: center;
+}
+
+.pantry-minimap-cell {
+    width: 75px;
+    height: 75px;
+    background-color: #222;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+}
+
+.pantry-minimap-cell.active {
+    background-color: #6a0dad;
+}
+
+.dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    grid-template-rows: repeat(3, 50px);
+    justify-content: center;
+    gap: 25px;
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+.dpad-button {
+    width: 75px;
+    height: 70px;
+    font-size: 20px;
+    background-color: #444;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html> <!--ensures that the browser renders the html5 correctly-->
+<html lang="en"> <!--primary language is english-->
+    <head>
+        <meta charset="UTF-8"> <!--ensures that any special characters will show up correctly-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--ensures this loads correctly on mobile devices--> 
+        <Title>After Midnight</Title> <!--sets title of webpage-->
+        <link rel="icon" type="image/gif" href="Assets/favicon.ico"> <!--sets .ico file as a favicon-->
+        <link rel = "stylesheet" href = "style.css"> <!--links .css file-->
+    </head>
+    <body>
+        <div class="stars"></div> <!--these 2 lines add the star effect-->
+        <div class="stars2"></div>
+        <div class="dropdown">
+            <button class="drop_menu">Menu</button><!--Drop down attempt-->
+            <div class="dropdown-content">
+                <a href="#" onclick="handleMenuSelection('option1')">Restart</a> <!--created a function in js to call functions there-->
+                <a href="#" onclick="handleMenuSelection('option2')">Stats</a>
+                <a href="#" onclick="handleMenuSelection('option6')">Inventory</a>
+                <a href="#" onclick="handleMenuSelection('option3')">Load</a>
+                <a href="#" onclick="handleMenuSelection('option4')">Save</a> 
+                <!--id gives ability to change text in js-->
+                <a href="#" id="settings_toggle" onclick="handleMenuSelection('option5')">Settings</a>
+            </div>
+        </div>
+        <!--settings panel config-->
+        <div id="settings_panel" class="stats-panel" style="display: none;">
+            <h3>Settings</h3>
+            <div class="settings-row">
+                <!--volume slider-->
+                <label for="volume_slider">Volume:</label>
+                <input type="range" id="volume_slider" min="0.1" max="1" step="0.1" value="0.5"> <!--slider default set at 50%-->
+            </div>
+            <div class="settings-row">
+                <!--mute button-->
+                <label for="music_toggle_btn">Music:</label>
+                <button id="music_toggle_btn">Mute</button>
+            </div>
+            <button class="close-btn" onclick="document.getElementById('settings_panel').style.display='none'" style="float:right;">X</button>
+          </div>          
+        <div id = "first_load"> <!--intro content-->
+            <h1 class="title floaty">Shall We Explore the City After Midnight?</h1> <!--a heading-->
+        <!--^^^^^^^^^^^^^^ this tells html to use the title class in .css for the title
+            It is also two classes simply separated with a space-->
+            <label for = "text_input">But first, what is your name?</label> 
+            <input id = "text_input" placeholder="Your Name" type="text"></input> <!--textbox to enter name-->
+            <button id = "start_button">Start the story!</button> 
+        </div>
+        <div id="skip-tip" class="skip-tip">Press [Space] to skip</div>
+        <div id="story_container"></div> <!--div that loads story text-->
+        <div id="shop_name_input" style="display: none; text-align: center;"> <!--textbox to get shop name-->
+            <label for="shop_input">What is your shop's name?</label><br>
+            <input id="shop_input" placeholder="Shop Name" type="text"/>
+            <button id="shop_submit">Confirm</button>
+        </div>
+        <div class="puzzle-container" id="puzzle-container">
+            <div class="feedback-log" id="feedback-log"></div> <!--changed when visuals are added in-->
+        </div>
+        <div class="fight-container" id="fight-container">
+            <div class="hp-display">
+                <div id="enemy-hp">Enemy HP: #</div>
+                <div id="player-hp">Player HP: #</div>
+            </div>
+            <div id="turn-log" class="turn-log"></div>
+            <div class="button-group">
+                <button id="attack-btn">ATTACK</button>
+                <button id="skill-btn">SKILL</button>
+                <button id="item-btn">USE ITEM</button>
+            </div>
+        </div>
+        <div id="choices_container"></div> <!--div that loads choices-->
+        <div id="class_choices"></div> <!--seperate classes from choices so that only class btns have tooltip-->
+        <div id="stats_panel" class="stats-panel"> <!-- ui stats panel-->
+            <h3>Player Stats</h3> <!--strong emphasizes-->
+            <h5><strong><span id="stat_class">---</span></strong></h5>
+            <p><strong>Name:</strong> <span id="stat_name">---</span></p>
+            <p><strong>Level:</strong> <span id="stat_level">0</span></p>
+            <p><strong>ATK:</strong> <span id="stat_atk">1</span></p>
+            <p><strong>DEF:</strong> <span id="stat_def">1</span></p>
+            <p><strong>HP:</strong> <span id="stat_hp">10</span></p>
+            <!--close button for stats panel-->
+            <button class="close-btn" onclick="document.getElementById('stats_panel').style.display='none'" style="float:right;">X</button>
+          </div>
+          <div id="minimap_container" style="display: none"> <!--background of minimap, hidden by default-->
+            <div id="minimap"></div> <!--actual minimap-->
+            <div id="minimap_label">Map</div>
+          </div>                    
+        <div class="skyline"></div> <!--adds skyline to html-->
+        <!--resuses stats panel design/style-->
+        <div id="inventory_panel" class="stats-panel" style="display: none;">
+            <h3>Inventory</h3>
+            <ul id="inventory_list"></ul> <!--unordered list-->
+            <button class="close-btn" onclick="document.getElementById('inventory_panel').style.display='none'" style="float:right">X</button>
+        </div>
+        <script src = "data.js"></script> <!--grabs .js file-->
+        <script src = "puzzles.js"></script>
+        <script src = "script.js"></script> 
+        <script src = "fight.js"></script><!--DO NOT CHANGE THE ORDER OF THIS-->
+        <audio id="background_music" src="Assets/human gazpacho - The Road to the Black Rose Tavern.mp3" loop autoplayS></audio> <!--implement background music-->
+        <audio id="fight_music" src="Assets/Viscid - Wrecked.mp3" loop autoplayS></audio>
+        <audio id="btn_sfx" src="Assets/589175__mrfossy__sfx_monosjam_slayer_18.wav" preload="auto"></audio> <!--preload avoids an awkward delay after button clicks-->
+    </body>
+</html>

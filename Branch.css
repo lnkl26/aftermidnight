@@ -1,0 +1,411 @@
+@font-face {
+    font-family: 'title_font';
+    src: url('Assets/fonts/PirataOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'body_font';
+    src: url('Assets/fonts/fantasque-sans-mono.regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: linear-gradient(to bottom, rgb(48, 26, 146), rgb(68, 38, 159), rgb(90, 27, 228), rgb(123, 76, 254), rgb(179, 135, 254));
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    font-family: 'body_font';
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.title {
+    font-family: 'title_font';
+    font-size: 75px;
+    text-align: center;
+    color: white;
+    -webkit-text-stroke: 0.5px black;
+    margin-top: 25px;
+    animation: floaty 3s ease-in-out infinite;
+}
+
+@keyframes floaty {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(0) rotate(1deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(0) rotate(-1deg); }
+}
+
+button {
+    padding: 5px 10px;
+    margin-top: 5px;
+    background-color: #621cd3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4e15b1;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.level {
+    font-family: 'title_font';
+    font-size: 40px;
+    margin-top: 20px;
+    color: white;
+}
+
+.level-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.level-button {
+    font-family: 'body_font';
+    font-size: 24px;
+    padding: 12px 24px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #000000, #621cd3);
+    color: white;
+    box-shadow: 0px 5px 10px white;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.level-button:hover {
+    background: linear-gradient(to bottom, #000000, #34016b);
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px white;
+}
+
+.level-button:active {
+    transform: scale(0.95);
+    box-shadow: 0px 3px 7px rgba(53, 53, 53, 0.4);
+}
+
+#newGameContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 15px;
+    border: 2px dashed white;
+    display: inline-block;
+}
+
+#newGameButton {
+    background: linear-gradient(to bottom, #000000, #621cd3);
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#newGameButton:hover:not(:disabled) {
+    background: linear-gradient(to bottom, #000000, #34016b);
+    transform: scale(1.05);
+}
+
+#newGameButton:disabled {
+    background: linear-gradient(to bottom, #333333, #666666);
+    color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#newGameMessage {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%; /* Below the button */
+    left: 0;
+    right: 0;
+    margin-top: 5px;
+    padding: 5px;
+    background-color: #621cd3;
+    color: white;
+    font-size: 14px;
+    line-height: 16px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    z-index: 1;
+}
+
+#saveSlots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.save-slot {
+    position: relative; /* For positioning the tooltip */
+    width: 100%;
+    min-width: 150px;
+    height: 180px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #4e15b1;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 1; /* Base z-index for save slots */
+}
+
+.save-slot:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px white;
+    z-index: 2; /* Slightly higher z-index when hovered */
+}
+
+.save-slot.empty {
+    background-color: #34016b;
+}
+
+/* Fixed position elements within save-slot */
+.save-slot .date {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+}
+
+.save-slot .player-name {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.save-slot .progress {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.save-slot-buttons {
+    position: absolute; /* Fix buttons to the bottom */
+    bottom: 10px; /* Distance from bottom */
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    padding: 0 10px; /* Match save-slot padding */
+    box-sizing: border-box;
+}
+
+.save-slot-buttons button {
+    width: 100%; /* Full width within container */
+    padding: 5px; /* Smaller padding to match screenshot */
+    background-color: #621cd3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px; /* Smaller font size to match screenshot */
+    line-height: 14px;
+}
+
+.save-slot-buttons button:hover {
+    background-color: #4e15b1;
+}
+
+.save-slot-buttons button:active {
+    transform: scale(0.95);
+}
+
+/* Tooltip for detailed game info */
+.save-slot .tooltip {
+    visibility: hidden;
+    width: 200px;
+    background-color: #621cd3;
+    color: white;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1; /* Base z-index for tooltip */
+    top: 0;
+    left: 110%; /* Position to the right of the slot */
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 16px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Show tooltip on hover and bring it to the front */
+.save-slot:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+    z-index: 10; /* Higher z-index to ensure tooltip is in front */
+}
+
+/* Adjust for smaller screens (e.g., mobile or minimized window) */
+@media (max-width: 600px) {
+    #saveSlots {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium-small screens */
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .save-slot {
+        min-width: 120px;
+        height: 160px;
+    }
+
+    .save-slot-buttons button {
+        font-size: 10px;
+        padding: 4px;
+        line-height: 12px;
+    }
+
+    .save-slot .tooltip {
+        width: 150px;
+        left: 0; /* Move below on small screens */
+        top: 110%;
+        z-index: 10; /* Ensure tooltip is in front on small screens */
+    }
+
+    .save-slot .date {
+        top: 5px;
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .save-slot .player-name {
+        top: 20px;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .save-slot .progress {
+        top: 35px;
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .save-slot-buttons {
+        bottom: 5px;
+    }
+
+    #newGameContainer {
+        top: 5px;
+        right: 5px;
+        padding: 10px;
+    }
+
+    #newGameButton {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    #newGameMessage {
+        font-size: 12px;
+        line-height: 14px;
+        padding: 3px;
+        margin-top: 3px;
+    }
+}
+
+/* Adjust for very small screens (e.g., mobile portrait or very minimized window) */
+@media (max-width: 400px) {
+    #saveSlots {
+        grid-template-columns: 1fr; /* Single column for very small screens */
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .save-slot {
+        min-width: 100%; /* Full width */
+        height: 140px; /* Slightly shorter for very small screens */
+    }
+
+    .save-slot-buttons button {
+        font-size: 9px;
+        padding: 3px;
+        line-height: 10px;
+    }
+
+    .save-slot .tooltip {
+        width: 120px;
+        top: 100%;
+        font-size: 14px;
+        z-index: 10; /* Ensure tooltip is in front on very small screens */
+    }
+
+    .save-slot .date {
+        top: 3px;
+        font-size: 9px;
+        line-height: 10px;
+    }
+
+    .save-slot .player-name {
+        top: 15px;
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .save-slot .progress {
+        top: 30px;
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .save-slot-buttons {
+        bottom: 3px;
+    }
+
+    #newGameContainer {
+        top: 3px;
+        right: 3px;
+        padding: 5px;
+    }
+
+    #newGameButton {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    #newGameMessage {
+        font-size: 10px;
+        line-height: 12px;
+        padding: 2px;
+        margin-top: 2px;
+    }
+}
+
+.column {
+    max-height: 500px;
+    overflow-y: auto;
+}

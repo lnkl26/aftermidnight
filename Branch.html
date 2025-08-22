@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Save System</title>
+    <link rel="stylesheet" href="Branch.css">
+</head>
+<body>
+    <div id="header">
+        <div id="newGameContainer">
+            <!-- Added a NEW GAME button that will be used to start a game and take to the index game start-->
+            <button id="newGameButton" onclick="startNewGame()" disabled>NEW GAME</button>
+            <!-- Message to show when New Game button is disabled -->
+            <div id="newGameMessage" style="display: none;">
+                To start a new game, please delete a saved game first.
+            </div>
+        </div>
+    </div>
+
+    <!--Will probably be elimated eventually-->
+    <h2>Saved Games</h2>
+
+    <!-- This is the container where the saved games will appear -->
+    <div id="saveSlots" class="game-grid"></div>
+    <!--This will be moved and created to delete individual-->
+    <!--<button onclick="clearSaves()">Clear Saves</button>-->
+    <script src="Branch.js"></script>
+</body>
+</html>
