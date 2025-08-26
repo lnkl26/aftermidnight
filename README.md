@@ -5,7 +5,7 @@ A university group project for the course CSCE 3444: Software Engineering. Playe
 * (member 2 name): (member 2 general tasks)
 * (member 3 name): (member 3 general tasks)
 * [Leann Kahal](https://github.com/lnkl26): HTML, CSS, and JavaScript to implement puzzle features. Assisted with dialogue-related and turn-based fighting features. 
-* (member 5 name): (member 5 general tasks)
+* [Chet Hefton]): (https://github.com/ChetHefton): HTML, CSS, and Javascript to implement user interface and animations.
 ## Project Status
 **Completed** MAY 2024
 ## How to Run
