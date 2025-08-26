@@ -2,10 +2,9 @@
 A university group project for the course CSCE 3444: Software Engineering. Players explore an urban fantasy environment, make impactful decisions, take on mysterious enemies, and discover hidden pathways.
 ## Members
 * (member 1 name): (member 1 general tasks)
-* (member 2 name): (member 2 general tasks)
-* (member 3 name): (member 3 general tasks)
+* [Jesselle Ballesil](https://github.com/CjBallesil): HTML, CSS, and JavaScript to implement transitions between scenes based on choices.
 * [Leann Kahal](https://github.com/lnkl26): HTML, CSS, and JavaScript to implement puzzle features. Assisted with dialogue-related and turn-based fighting features. 
-* [Chet Hefton]): (https://github.com/ChetHefton): HTML, CSS, and Javascript to implement user interface and animations.
+* [Chet Hefton](https://github.com/ChetHefton): HTML, CSS, and JavaScript to implement user interface and animations.
 ## Project Status
 **Completed** MAY 2024
 ## How to Run
